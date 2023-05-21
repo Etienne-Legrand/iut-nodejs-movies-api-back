@@ -1,7 +1,7 @@
 import express from "express";
 import Datastore from "nedb";
 
-const PORT = 3782;
+const PORT = 3000;
 
 // Base de données
 const db = new Datastore({ filename: "movies" });
@@ -9,9 +9,9 @@ db.loadDatabase();
 
 // Start express
 const app = express();
-const router = express.Router();
-app.use(router);
 app.use(express.json());
+const router = express.Router();
+app.use("/api", router);
 app.listen(PORT, () => {
     console.log(`Le serveur est lancé sur le port ${PORT}`);
 });
@@ -21,7 +21,7 @@ app.listen(PORT, () => {
  **************************************/
 
 // Create
-router.post("/api/movies", (req, res) => {
+router.post("/movies", (req, res) => {
     // Vérifier si toutes les propriétés nécessaires sont présentes
     const requiredProps = ["titre", "anneeDeSortie", "langue", "realisateur", "genre", "poster"];
     const missingProps = requiredProps.filter(prop => !req.body.hasOwnProperty(prop));
@@ -45,7 +45,7 @@ router.post("/api/movies", (req, res) => {
 });
 
 // Read all
-router.get("/api/movies", (req, res) => {
+router.get("/movies", (req, res) => {
     db.find({}, (err, docs) => {
         if (err) {
             // En cas d'erreur lors de la recherche dans la base de données, renvoyer une réponse d'erreur avec le code 500 (Internal Server Error)
@@ -58,7 +58,7 @@ router.get("/api/movies", (req, res) => {
 });
 
 // Read one
-router.get("/api/movies/:id", (req, res) => {
+router.get("/movies/:id", (req, res) => {
     db.findOne({ _id: req.params.id }, (err, movie) => {
         if (err) {
             // En cas d'erreur lors de la recherche dans la base de données, renvoyer une réponse d'erreur avec le code 500 (Internal Server Error)
@@ -74,7 +74,7 @@ router.get("/api/movies/:id", (req, res) => {
 });
 
 // Update
-router.patch("/api/movies/:id", (req, res) => {
+router.patch("/movies/:id", (req, res) => {
     const updatedMovie = { ...req.body };
 
     db.update({ _id: req.params.id }, { $set: updatedMovie }, {}, (err, nbMoviesUpdated) => {
@@ -92,7 +92,7 @@ router.patch("/api/movies/:id", (req, res) => {
 });
 
 // Delete
-router.delete("/api/movies/:id", (req, res) => {
+router.delete("/movies/:id", (req, res) => {
     db.remove({ _id: req.params.id }, {}, (err, nbMoviesRemoved) => {
         if (err) {
             // En cas d'erreur lors de la suppression dans la base de données, renvoyer une réponse d'erreur avec le code 500 (Internal Server Error)
