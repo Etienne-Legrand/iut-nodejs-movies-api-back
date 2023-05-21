@@ -1,7 +1,7 @@
 import express from "express";
 import Datastore from "nedb";
 
-const PORT = 3000;
+const PORT = 3782;
 
 // Base de données
 const db = new Datastore({ filename: "movies" });
@@ -19,16 +19,6 @@ app.listen(PORT, () => {
 /**************************************
  ************** API CRUD **************
  **************************************/
-// Test
-router.get("/test", (req, res) => {
-    res.json({ message: "Test" });
-});
-
-// Test
-router.get("/api/test", (req, res) => {
-    res.json({ message: "Test api" });
-});
-
 
 // Create
 router.post("/api/movies", (req, res) => {
