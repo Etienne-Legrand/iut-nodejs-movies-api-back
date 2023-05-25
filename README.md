@@ -7,7 +7,7 @@ npm install
 
 ## Démarrer le serveur
 ```
-npm run serve
+npm run start
 ```
 
 ## Explication rapide du projet
