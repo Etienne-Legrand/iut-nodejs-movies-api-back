@@ -1,18 +1,28 @@
-# API-CRUD-Movies (Etienne Legrand - DAWIN A)
+# Node.js Movie API
 
-## Installer les dépendances
-```
-npm install
-```
+Ce projet est une API développée avec Node.js qui permet de gérer une liste de films, j'utilise NeDB pour avoir une base de donnée simple basée sur MongoDB.
 
-## Démarrer le serveur
-```
-npm run start
-```
+Lien du projet Vue.js qui utilise l'API : https://github.com/Etienne-Legrand/iut-vuejs-movies-app-front
 
-## Explication rapide du projet
-L'api utilise node js avec express pour simplifier la création des routes et NeDB pour avoir une base de donnée simple basée sur MongoDB.
-L'api est déjà en ligne à cette adresse donc pas besoin de démarrer le projet pour l'utiliser : http://185.212.226.104/api/movies
+## Prérequis
 
-## Lien du projet qui utilise l'api
-https://gitlab-ce.iut.u-bordeaux.fr/etlegrand/movies-app
+1. Node.js 18+
+
+## Installation
+
+1. Clonez ce dépôt sur votre machine locale.
+2. Déplacez-vous dans le répertoire du projet
+3. Exécutez la commande `npm install` pour installer les dépendances.
+
+## Utilisation
+
+1. Exécutez la commande `npm run start` pour démarrer le serveur de développement.
+2. Accédez à http://localhost:3000/api/movies dans votre navigateur pour utiliser l'API.
+
+## Fonctionnalités
+
+- **GET** `/api/movies` - Récupérer tous les films
+- **GET** `/api/movies/:id` - Récupérer un film par ID
+- **POST** `/api/movies` - Ajouter un film
+- **PATCH** `/api/movies/:id` - Modifier un film
+- **DELETE** `/api/movies/:id` - Supprimer un film
