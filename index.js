@@ -1,7 +1,10 @@
 import express from "express";
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
-import crypto from "crypto";
+import crypto from "node:crypto";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const PORT = 3000;
 
@@ -34,6 +37,52 @@ app.listen(PORT, () => {
 /**************************************
  *********** API CRUD MOVIES **********
  **************************************/
+
+// Get OMDB data
+router.get("/omdb", async (req, res) => {
+  try {
+    const { title = req.query.t, year = req.query.y } = req.query;
+
+    // Vérification de la clé API
+    const apiKey = process.env.OMDB_API_KEY;
+    if (!apiKey) {
+      return res
+        .status(500)
+        .json({ error: "Clé API OMDB non configurée sur le serveur." });
+    }
+
+    // Vérification du paramètre titre
+    if (!title) {
+      return res
+        .status(400)
+        .json({ error: "Le paramètre 't' (titre) est requis." });
+    }
+
+    let url = `https://www.omdbapi.com/?apikey=${apiKey}&t=${encodeURIComponent(
+      title
+    )}`;
+    if (year) {
+      url += `&y=${encodeURIComponent(year)}`;
+    }
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.Response === "False") {
+      return res
+        .status(404)
+        .json({ error: data.Error || "Film non trouvé sur OMDB." });
+    }
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des données OMDB:", error);
+    res.status(500).json({
+      error:
+        "Une erreur est survenue lors de la récupération des données OMDB.",
+    });
+  }
+});
 
 // Create
 router.post("/movies", async (req, res) => {

@@ -13,6 +13,12 @@ Lien du projet Vue.js qui utilise l'API : https://github.com/Etienne-Legrand/iut
 1. Clonez ce dépôt sur votre machine locale.
 2. Déplacez-vous dans le répertoire du projet
 3. Exécutez la commande `npm install` pour installer les dépendances.
+4. Créez un fichier `.env` à la racine du projet en copiant `.env.example`
+5. Ajoutez votre clé API OMDB dans le fichier `.env` :
+   ```
+   OMDB_API_KEY=votre_cle_api_ici
+   ```
+   Vous pouvez obtenir une clé gratuite sur [OMDB API](https://www.omdbapi.com/apikey.aspx)
 
 ## Utilisation
 
@@ -26,3 +32,4 @@ Lien du projet Vue.js qui utilise l'API : https://github.com/Etienne-Legrand/iut
 - **POST** `/api/movies` - Ajouter un film
 - **PATCH** `/api/movies/:id` - Modifier un film
 - **DELETE** `/api/movies/:id` - Supprimer un film
+- **GET** `/api/omdb?t=titre&y=annee` - Récupérer les informations d'un film depuis OMDB (proxy sécurisé)
