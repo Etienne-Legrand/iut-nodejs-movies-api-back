@@ -3,6 +3,7 @@
 API développée en Node.js pour gérer une liste de films, utilisant LowDB pour avoir une base de données simple au format JSON.
 
 Lien du projet Vue.js qui utilise l'API : https://github.com/Etienne-Legrand/iut-vuejs-movies-app-front
+https://github.com/user-attachments/assets/1b976bbc-1a64-4bf1-b336-0d24a09c03e6
 
 ## Prérequis
 
